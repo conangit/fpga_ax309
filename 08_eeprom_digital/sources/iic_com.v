@@ -76,7 +76,7 @@ module iic_com(
             isDone <= 1'b0;
             isOut <= 1'b1;
         end
-        else if (start_sig[0]) //i2c读数据
+        else if (start_sig[0]) //i2c写数据
             case (i)
             
                 0: //start
