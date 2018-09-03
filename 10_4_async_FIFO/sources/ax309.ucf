@@ -1,0 +1,58 @@
+##
+NET sysclk LOC = T8 | TNM_NET = sys_clk_pin | IOSTANDARD = "LVCMOS33";
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 50000kHz;
+##
+
+NET rst_n LOC = L3 | IOSTANDARD = "LVCMOS33";
+
+##########################################################################
+
+##########################################################################
+## LED
+# NET led<3> LOC = P4 | IOSTANDARD = "LVCMOS33"; ##led0
+# NET led<2> LOC = N5 | IOSTANDARD = "LVCMOS33"; ##led1
+# NET led<1> LOC = P5 | IOSTANDARD = "LVCMOS33"; ##led2
+# NET led<0> LOC = M6 | IOSTANDARD = "LVCMOS33"; ##led3
+
+##########################################################################
+## KEY
+# NET key_in<0> LOC = C3 | IOSTANDARD = "LVCMOS33";
+# NET key_in<1> LOC = D3 | IOSTANDARD = "LVCMOS33";
+# NET key_in<2> LOC = E4 | IOSTANDARD = "LVCMOS33";
+# NET key_in<3> LOC = E3 | IOSTANDARD = "LVCMOS33";
+
+##########################################################################
+## buzzer
+# NET clk_out LOC = J11 | IOSTANDARD = "LVCMOS33";
+
+##########################################################################
+##uart
+# NET rx LOC = C11 | IOSTANDARD = "LVCMOS33";
+# NET tx LOC = D12 | IOSTANDARD = "LVCMOS33";
+
+##########################################################################
+##i2c
+# NET scl LOC = N12 | IOSTANDARD = "LVCMOS33";
+# NET sda LOC = P12 | IOSTANDARD = "LVCMOS33";
+
+##########################################################################
+## Digital
+# NET smg_data[7] LOC = C6 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[6] LOC = D5 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[5] LOC = E7 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[4] LOC = D6 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[3] LOC = F7 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[2] LOC = C5 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[1] LOC = E6 | IOSTANDARD = "LVCMOS33";
+# NET smg_data[0] LOC = C7 | IOSTANDARD = "LVCMOS33";
+
+## 从左往右 MSB->LSB
+# NET scan_sig[5] LOC = D9  | IOSTANDARD = "LVCMOS33";
+# NET scan_sig[4] LOC = E10 | IOSTANDARD = "LVCMOS33";
+# NET scan_sig[3] LOC = F10 | IOSTANDARD = "LVCMOS33";
+# NET scan_sig[2] LOC = F9  | IOSTANDARD = "LVCMOS33";
+# NET scan_sig[1] LOC = E8  | IOSTANDARD = "LVCMOS33";
+# NET scan_sig[0] LOC = D8  | IOSTANDARD = "LVCMOS33";
+##########################################################################
+
+
