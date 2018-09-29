@@ -55,12 +55,9 @@
 // "Output    Output      Phase     Duty      Pk-to-Pk        Phase"
 // "Clock    Freq (MHz) (degrees) Cycle (%) Jitter (ps)  Error (ps)"
 //----------------------------------------------------------------------------
-// CLK_OUT1_____5.000______0.000______50.0______426.583____213.839
-// CLK_OUT2____10.000______0.000______50.0______373.247____213.839
-// CLK_OUT3____25.000______0.000______50.0______311.133____213.839
-// CLK_OUT4____75.000______0.000______50.0______247.866____213.839
-// CLK_OUT5___100.000______0.000______50.0______233.202____213.839
-// CLK_OUT6___300.000______0.000______50.0______188.226____213.839
+// CLK_OUT1____25.000______0.000______50.0______308.718____251.827
+// CLK_OUT2____10.000______0.000______50.0______371.632____251.827
+// CLK_OUT3_____5.000______0.000______50.0______426.108____251.827
 //
 //----------------------------------------------------------------------------
 // "Input Clock   Freq (MHz)    Input Jitter (UI)"
@@ -69,7 +66,7 @@
 
 `timescale 1ps/1ps
 
-(* CORE_GENERATION_INFO = "pll_ip,clk_wiz_v3_6,{component_name=pll_ip,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,feedback_source=FDBK_AUTO,primtype_sel=PLL_BASE,num_out_clk=6,clkin1_period=20.000,clkin2_period=20.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,use_status=false,use_freeze=false,use_clk_valid=false,feedback_type=SINGLE,clock_mgr_type=AUTO,manual_override=false}" *)
+(* CORE_GENERATION_INFO = "pll_ip,clk_wiz_v3_6,{component_name=pll_ip,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,feedback_source=FDBK_AUTO,primtype_sel=PLL_BASE,num_out_clk=3,clkin1_period=20.0,clkin2_period=20.0,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,use_status=false,use_freeze=false,use_clk_valid=false,feedback_type=SINGLE,clock_mgr_type=AUTO,manual_override=false}" *)
 module pll_ip
  (// Clock in ports
   input         CLK_IN1,
@@ -77,9 +74,6 @@ module pll_ip
   output        CLK_OUT1,
   output        CLK_OUT2,
   output        CLK_OUT3,
-  output        CLK_OUT4,
-  output        CLK_OUT5,
-  output        CLK_OUT6,
   // Status and control signals
   input         RESET,
   output        LOCKED
@@ -101,33 +95,27 @@ module pll_ip
   wire        drdy_unused;
   wire        clkfbout;
   wire        clkfbout_buf;
+  wire        clkout3_unused;
+  wire        clkout4_unused;
+  wire        clkout5_unused;
 
   PLL_BASE
   #(.BANDWIDTH              ("OPTIMIZED"),
     .CLK_FEEDBACK           ("CLKFBOUT"),
     .COMPENSATION           ("SYSTEM_SYNCHRONOUS"),
     .DIVCLK_DIVIDE          (1),
-    .CLKFBOUT_MULT          (12),
+    .CLKFBOUT_MULT          (8),
     .CLKFBOUT_PHASE         (0.000),
-    .CLKOUT0_DIVIDE         (120),
+    .CLKOUT0_DIVIDE         (16),
     .CLKOUT0_PHASE          (0.000),
     .CLKOUT0_DUTY_CYCLE     (0.500),
-    .CLKOUT1_DIVIDE         (60),
+    .CLKOUT1_DIVIDE         (40),
     .CLKOUT1_PHASE          (0.000),
     .CLKOUT1_DUTY_CYCLE     (0.500),
-    .CLKOUT2_DIVIDE         (24),
+    .CLKOUT2_DIVIDE         (80),
     .CLKOUT2_PHASE          (0.000),
     .CLKOUT2_DUTY_CYCLE     (0.500),
-    .CLKOUT3_DIVIDE         (8),
-    .CLKOUT3_PHASE          (0.000),
-    .CLKOUT3_DUTY_CYCLE     (0.500),
-    .CLKOUT4_DIVIDE         (6),
-    .CLKOUT4_PHASE          (0.000),
-    .CLKOUT4_DUTY_CYCLE     (0.500),
-    .CLKOUT5_DIVIDE         (2),
-    .CLKOUT5_PHASE          (0.000),
-    .CLKOUT5_DUTY_CYCLE     (0.500),
-    .CLKIN_PERIOD           (20.000),
+    .CLKIN_PERIOD           (20.0),
     .REF_JITTER             (0.010))
   pll_base_inst
     // Output clocks
@@ -135,9 +123,9 @@ module pll_ip
     .CLKOUT0               (clkout0),
     .CLKOUT1               (clkout1),
     .CLKOUT2               (clkout2),
-    .CLKOUT3               (clkout3),
-    .CLKOUT4               (clkout4),
-    .CLKOUT5               (clkout5),
+    .CLKOUT3               (clkout3_unused),
+    .CLKOUT4               (clkout4_unused),
+    .CLKOUT5               (clkout5_unused),
     // Status and control signals
     .LOCKED                (LOCKED),
     .RST                   (RESET),
@@ -164,18 +152,6 @@ module pll_ip
   BUFG clkout3_buf
    (.O   (CLK_OUT3),
     .I   (clkout2));
-
-  BUFG clkout4_buf
-   (.O   (CLK_OUT4),
-    .I   (clkout3));
-
-  BUFG clkout5_buf
-   (.O   (CLK_OUT5),
-    .I   (clkout4));
-
-  BUFG clkout6_buf
-   (.O   (CLK_OUT6),
-    .I   (clkout5));
 
 
 

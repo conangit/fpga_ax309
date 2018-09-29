@@ -23,7 +23,10 @@ NET rst_n LOC = L3 | IOSTANDARD = "LVCMOS33";
 
 ##########################################################################
 ## buzzer
-NET clk_out LOC = J11 | IOSTANDARD = "LVCMOS33";
+#NET clk_out LOC = J11 | IOSTANDARD = "LVCMOS33";
 
 ##########################################################################
 
+NET clk_out[2] LOC = J16 | IOSTANDARD = "LVCMOS33";
+NET clk_out[1] LOC = K15 | IOSTANDARD = "LVCMOS33";
+NET clk_out[0] LOC = M16 | IOSTANDARD = "LVCMOS33";
